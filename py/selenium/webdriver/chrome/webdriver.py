@@ -41,16 +41,16 @@ class WebDriver(RemoteWebDriver):
         Starts the service and then creates new instance of chrome driver.
 
         :Args:
-         - executable_path - path to the executable. If the default is used it assumes the executable is in the $PATH
-         - port - port you would like the service to run, if left as 0, a free port will be found.
+         - executable_path - Deprecated: path to the executable. If the default is used it assumes the executable is in the $PATH
+         - port - Deprecated: port you would like the service to run, if left as 0, a free port will be found.
          - options - this takes an instance of ChromeOptions
-         - service_args - List of args to pass to the driver service
-         - desired_capabilities - Dictionary object with non-browser specific
+         - service_args - Deprecated: List of args to pass to the driver service
+         - desired_capabilities - Deprecated: Dictionary object with non-browser specific
            capabilities only, such as "proxy" or "loggingPref".
-         - service_log_path - Where to log information from the driver.
+         - service_log_path - Deprecated: Where to log information from the driver.
          - keep_alive - Whether to configure ChromeRemoteConnection to use HTTP keep-alive.
         """
-        if executable_path != 'IEDriverServer.exe':
+        if executable_path != 'chromedriver':
             warnings.warn('executable_path has been deprecated, please pass in a Service object',
                           DeprecationWarning, stacklevel=2)
         if capabilities is not None:
