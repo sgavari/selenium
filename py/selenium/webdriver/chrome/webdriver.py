@@ -21,6 +21,8 @@ from .service import Service
 from .options import Options
 
 
+DEFAULT_PORT = 0
+
 class WebDriver(RemoteWebDriver):
     """
     Controls the ChromeDriver and allows you to drive the browser.
@@ -29,10 +31,10 @@ class WebDriver(RemoteWebDriver):
     http://chromedriver.storage.googleapis.com/index.html
     """
 
-    def __init__(self, executable_path="chromedriver", port=0,
+    def __init__(self, executable_path="chromedriver", port=DEFAULT_PORT,
                  options=None, service_args=None,
                  desired_capabilities=None, service_log_path=None,
-                 chrome_options=None, keep_alive=True):
+                 chrome_options=None, service=None, keep_alive=True):
         """
         Creates a new instance of the chrome driver.
 
@@ -48,6 +50,24 @@ class WebDriver(RemoteWebDriver):
          - service_log_path - Where to log information from the driver.
          - keep_alive - Whether to configure ChromeRemoteConnection to use HTTP keep-alive.
         """
+        if executable_path != 'IEDriverServer.exe':
+            warnings.warn('executable_path has been deprecated, please pass in a Service object',
+                          DeprecationWarning, stacklevel=2)
+        if capabilities is not None:
+            warnings.warn('capabilities has been deprecated, please pass in a Service object',
+                          DeprecationWarning, stacklevel=2)
+        if port != DEFAULT_PORT:
+            warnings.warn('port has been deprecated, please pass in a Service object',
+                          DeprecationWarning, stacklevel=2)
+        self.port = port
+        if log_level != DEFAULT_LOG_LEVEL:
+            warnings.warn('log_level has been deprecated, please pass in a Service object',
+                          DeprecationWarning, stacklevel=2)
+        if service_log_path != DEFAULT_SERVICE_LOG_PATH:
+            warnings.warn('service_log_path has been deprecated, please pass in a Service object',
+                          DeprecationWarning, stacklevel=2)
+
+
         if chrome_options:
             warnings.warn('use options instead of chrome_options',
                           DeprecationWarning, stacklevel=2)
@@ -63,11 +83,14 @@ class WebDriver(RemoteWebDriver):
             else:
                 desired_capabilities.update(options.to_capabilities())
 
-        self.service = Service(
-            executable_path,
-            port=port,
-            service_args=service_args,
-            log_path=service_log_path)
+        if service:
+            self.service = service
+        else:
+            self.service = Service(
+                executable_path,
+                port=port,
+                service_args=service_args,
+                log_path=service_log_path)
         self.service.start()
 
         try:

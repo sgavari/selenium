@@ -33,7 +33,7 @@ class WebDriver(RemoteWebDriver):
                  port=DEFAULT_PORT, timeout=DEFAULT_TIMEOUT, host=DEFAULT_HOST,
                  log_level=DEFAULT_LOG_LEVEL, service_log_path=DEFAULT_SERVICE_LOG_PATH,
                  options=None, service=None,
-                 ie_options=None, desired_capabilities=None, log_file=None, keep_alive=False):
+                 desired_capabilities=None, keep_alive=False):
         """
         Creates a new instance of the chrome driver.
 
