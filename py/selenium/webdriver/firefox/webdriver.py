@@ -101,8 +101,30 @@ class WebDriver(RemoteWebDriver):
         :param keep_alive: Whether to configure remote_connection.RemoteConnection to use
              HTTP keep-alive.
         """
+
+        if executable_path != 'geckodriver':
+            warnings.warn('executable_path has been deprecated, please pass in a Service object',
+                          DeprecationWarning, stacklevel=2)
+        if capabilities is not None:
+            warnings.warn('capabilities has been deprecated, please pass in a Service object',
+                          DeprecationWarning, stacklevel=2)
+        if firefox_binary is not None:
+            warnings.warn('firefox_binary has been deprecated, please pass in a Service object',
+                          DeprecationWarning, stacklevel=2)
         self.binary = None
+        if firefox_profile is not None:
+            warnings.warn('firefox_profile has been deprecated, please pass in a Service object',
+                          DeprecationWarning, stacklevel=2)
         self.profile = None
+
+        if log_level != DEFAULT_LOG_LEVEL:
+            warnings.warn('log_level has been deprecated, please pass in a Service object',
+                          DeprecationWarning, stacklevel=2)
+        if log_path != DEFAULT_SERVICE_LOG_PATH:
+            warnings.warn('log_path has been deprecated, please pass in a Service object',
+                          DeprecationWarning, stacklevel=2)
+
+
         self.service = None
 
         # If desired capabilities is set, alias it to capabilities.
