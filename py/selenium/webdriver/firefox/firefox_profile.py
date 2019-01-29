@@ -67,7 +67,6 @@ class FirefoxProfile(object):
 
         self.default_preferences = copy.deepcopy(
             FirefoxProfile.DEFAULT_PREFERENCES['mutable'])
-        self.native_events_enabled = True
         self.profile_dir = profile_directory
         self.tempfolder = None
         if self.profile_dir is None:
@@ -151,17 +150,7 @@ class FirefoxProfile(object):
         if value not in [True, False]:
             raise WebDriverException("Please pass in a Boolean to this call")
 
-        self.set_preference("webdriver_assume_untrusted_issuer", value)
-
-    @property
-    def native_events_enabled(self):
-        return self.default_preferences['webdriver_enable_native_events']
-
-    @native_events_enabled.setter
-    def native_events_enabled(self, value):
-        if value not in [True, False]:
-            raise WebDriverException("Please pass in a Boolean to this call")
-        self.set_preference("webdriver_enable_native_events", value)
+        self.set_preference("webdriver_assume_untrusted_issf
 
     @property
     def encoded(self):
