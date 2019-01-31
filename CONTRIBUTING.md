@@ -38,7 +38,7 @@ If you'd like a hand at trying to implement the feature yourself, please refer t
 ## Documentation
 
 Selenium is a big software project and documentation is key to
-understanding how things work and learning effective ways to exploit
+understand how things work and learning effective ways to exploit
 its potential.
 
 The official documentation of Selenium is still served from our
